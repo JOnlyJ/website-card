@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>J — portfolio or whatever</title>
+  <meta name="description" content="J's portfolio. Work in progress. Aren't we all." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Comic+Neue:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg:     #0c0c10;
+      --bg2:    #13131a;
+      --border: #2a2a3a;
+      --accent: #c8ff00;
+      --dim:    #44445a;
+      --text:   #c0c0d8;
+      --bright: #eeeeff;
+      --warn:   #ffcc00;
+      --comic:  'Comic Sans MS', 'Comic Neue', cursive;
+      --pixel:  'Press Start 2P', monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--comic);
+      font-size: 16px;
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: radial-gradient(circle, #ffffff05 1px, transparent 1px);
+      background-size: 28px 28px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--dim); }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── CONSTRUCTION BANNER ───────────────────────────────── */
+    .site-notice {
+      background: repeating-linear-gradient(
+        -45deg,
+        #1a1500, #1a1500 6px,
+        #221d00 6px, #221d00 12px
+      );
+      border-bottom: 1px solid #3a3000;
+      padding: 0.5rem 1.5rem;
+      font-family: var(--pixel);
+      font-size: 0.38rem;
+      color: var(--warn);
+      letter-spacing: 0.12em;
+      text-align: center;
+    }
+
+    /* ── NAV ───────────────────────────────────────────────── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(12,12,16,0.96);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    nav {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .nav-brand {
+      font-family: var(--pixel);
+      font-size: 0.6rem;
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--comic);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--dim);
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--bright); text-decoration: none; }
+
+    /* ── HERO ──────────────────────────────────────────────── */
+    #hero {
+      padding: 7rem 0 5rem;
+      border-bottom: 1px dashed var(--border);
+    }
+
+    .hero-eyebrow {
+      font-family: var(--pixel);
+      font-size: 0.4rem;
+      color: var(--dim);
+      letter-spacing: 0.2em;
+      margin-bottom: 2rem;
+    }
+
+    .hero-name {
+      font-family: var(--pixel);
+      font-size: clamp(2.2rem, 10vw, 4.5rem);
+      color: var(--bright);
+      line-height: 1;
+      margin-bottom: 1.4rem;
+    }
+
+    .hero-name .cursor {
+      color: var(--accent);
+      animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .hero-role {
+      font-family: var(--comic);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 2rem;
+    }
+
+    .hero-bio {
+      max-width: 500px;
+      font-size: 1rem;
+      color: var(--text);
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-bio p + p { margin-top: 0.8rem; }
+
+    .btn {
+      font-family: var(--pixel);
+      font-size: 0.45rem;
+      padding: 0.75rem 1.3rem;
+      letter-spacing: 0.08em;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      transition: background 0.15s, color 0.15s;
+      display: inline-block;
+      text-decoration: none;
+    }
+    .btn:hover { background: var(--accent); color: var(--bg); text-decoration: none; }
+
+    /* ── SECTION SHELL ─────────────────────────────────────── */
+    section { padding: 5rem 0; border-bottom: 1px dashed var(--border); }
+
+    .section-label {
+      font-family: var(--pixel);
+      font-size: 0.4rem;
+      color: var(--dim);
+      letter-spacing: 0.2em;
+      margin-bottom: 0.7rem;
+    }
+
+    .section-title {
+      font-family: var(--comic);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--bright);
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── WORK ──────────────────────────────────────────────── */
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .work-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      padding: 1.25rem;
+      transition: border-color 0.15s;
+    }
+
+    .work-card:hover { border-color: #44445a; }
+
+    .work-thumb {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--pixel);
+      font-size: 0.35rem;
+      color: var(--dim);
+      letter-spacing: 0.08em;
+    }
+
+    .work-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .work-type {
+      font-family: var(--pixel);
+      font-size: 0.33rem;
+      color: var(--dim);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .work-title {
+      font-family: var(--comic);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--bright);
+      margin-bottom: 0.3rem;
+    }
+
+    .work-desc {
+      font-size: 0.88rem;
+      color: var(--dim);
+    }
+
+    .work-card.wip { opacity: 0.4; }
+
+    .work-card.wip .work-thumb {
+      background: repeating-linear-gradient(
+        -45deg,
+        var(--bg), var(--bg) 4px,
+        #0f0f18 4px, #0f0f18 8px
+      );
+    }
+
+    /* ── ABOUT ─────────────────────────────────────────────── */
+    .about-layout {
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      gap: 4rem;
+    }
+
+    @media (max-width: 600px) { .about-layout { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+    .about-text { font-size: 0.95rem; }
+    .about-text p + p { margin-top: 1rem; }
+
+    .skills-head {
+      font-family: var(--pixel);
+      font-size: 0.38rem;
+      color: var(--dim);
+      letter-spacing: 0.18em;
+      margin-bottom: 1.2rem;
+    }
+
+    .skills {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .skills li {
+      font-size: 0.92rem;
+      color: var(--text);
+      padding: 0.4rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .skills li:last-child { border-bottom: none; }
+
+    .skill-note {
+      font-size: 0.78rem;
+      color: var(--dim);
+      font-style: italic;
+    }
+
+    /* ── CONTACT ───────────────────────────────────────────── */
+    .contact-blurb {
+      font-size: 0.95rem;
+      max-width: 440px;
+      margin-bottom: 2.2rem;
+    }
+
+    .contact-blurb p + p { margin-top: 0.9rem; }
+
+    .contact-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .contact-link {
+      font-family: var(--comic);
+      font-size: 0.95rem;
+      font-weight: 700;
+      padding: 0.5rem 1.1rem;
+      border: 1px solid var(--border);
+      color: var(--dim);
+      transition: all 0.15s;
+      text-decoration: none;
+    }
+
+    .contact-link:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+
+    /* ── PRICING ───────────────────────────────────────────── */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-top: 3rem;
+    }
+
+    @media (max-width: 560px) { .pricing-grid { grid-template-columns: 1fr; } }
+
+    .pricing-card {
+      border: 1px solid var(--border);
+      padding: 1.6rem;
+      background: var(--bg2);
+    }
+
+    .pricing-card.preferred {
+      border-color: var(--accent);
+    }
+
+    .pricing-option {
+      font-family: var(--pixel);
+      font-size: 0.35rem;
+      color: var(--dim);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .pricing-card.preferred .pricing-option {
+      color: var(--accent);
+    }
+
+    .pricing-price {
+      font-family: var(--comic);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--bright);
+      margin-bottom: 0.3rem;
+      line-height: 1.1;
+    }
+
+    .pricing-price-note {
+      font-size: 0.8rem;
+      color: var(--dim);
+      font-style: italic;
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+
+    .pricing-desc {
+      font-size: 0.88rem;
+      color: var(--text);
+      border-top: 1px dashed var(--border);
+      padding-top: 1rem;
+    }
+
+    .pricing-caveat {
+      display: block;
+      margin-top: 0.9rem;
+      font-size: 0.8rem;
+      color: var(--dim);
+      font-style: italic;
+    }
+
+    /* ── FOOTER ────────────────────────────────────────────── */
+    footer {
+      position: relative;
+      z-index: 1;
+      padding: 2rem 1.5rem;
+    }
+
+    .footer-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-copy {
+      font-size: 0.85rem;
+      color: var(--dim);
+    }
+
+    .footer-note {
+      font-family: var(--pixel);
+      font-size: 0.35rem;
+      color: #222233;
+      letter-spacing: 0.1em;
+    }
+
+    /* ── RESPONSIVE ────────────────────────────────────────── */
+    @media (max-width: 480px) {
+      #hero { padding: 4.5rem 0 3.5rem; }
+      .work-grid { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="site-notice">
+    ⚠ &nbsp; UNDER CONSTRUCTION &nbsp; — &nbsp; HAS BEEN SINCE 2012 &nbsp; ⚠
+  </div>
+
+  <!-- ── NAV ───────────────────────────────────────────────── -->
+  <header>
+    <nav>
+      <span class="nav-brand">J</span>
+      <ul class="nav-links">
+        <li><a href="index.html">main</a></li>
+        <li><a href="#">work dump</a></li>
+        <li><a href="#" style="font-family:var(--pixel); font-size:0.38rem; font-weight:400; letter-spacing:0.08em; color:#333344;">expert mode</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ── HERO ──────────────────────────────────────────────── -->
+  <section id="hero">
+    <div class="container">
+      <p class="hero-eyebrow">// you found it</p>
+      <h1 class="hero-name">J<span class="cursor">_</span></h1>
+      <p class="hero-role">concept, composition, production, edit, post — the whole thing <span style="color:var(--dim); font-weight:400;">(shitposts included)</span></p>
+      <div class="hero-bio">
+        <p>
+          I do the whole thing — concept, art direction, composition,
+          shoot, edit, colour, post. No handoffs, no miscommunication,
+          no "that's not my department."
+        </p>
+        <p>
+          Available for freelance. Not available for calls
+          without a very good reason.
+        </p>
+      </div>
+      <a href="#work" class="btn">[ see the work ]</a>
+    </div>
+  </section>
+
+  <!-- ── WORK ──────────────────────────────────────────────── -->
+  <section id="work">
+    <div class="container">
+      <p class="section-label">// selected work</p>
+      <h2 class="section-title">Things I Am Proud Of</h2>
+
+      <div class="work-grid">
+
+        <article class="work-card">
+          <div class="work-thumb">
+            <!-- <img src="assets/project1.jpg" alt="" /> -->
+            NO PREVIEW
+          </div>
+          <p class="work-type">video</p>
+          <h3 class="work-title">Project Title</h3>
+          <p class="work-desc">Short description. One or two lines.</p>
+        </article>
+
+        <article class="work-card">
+          <div class="work-thumb">NO PREVIEW</div>
+          <p class="work-type">illustration</p>
+          <h3 class="work-title">Project Title</h3>
+          <p class="work-desc">Short description. One or two lines.</p>
+        </article>
+
+        <article class="work-card">
+          <div class="work-thumb">NO PREVIEW</div>
+          <p class="work-type">motion</p>
+          <h3 class="work-title">Project Title</h3>
+          <p class="work-desc">Short description. One or two lines.</p>
+        </article>
+
+        <article class="work-card wip">
+          <div class="work-thumb">COMING SOON</div>
+          <p class="work-type">???</p>
+          <h3 class="work-title">Something</h3>
+          <p class="work-desc">Not ready yet. Check back never.</p>
+        </article>
+
+        <article class="work-card wip">
+          <div class="work-thumb">COMING SOON</div>
+          <p class="work-type">???</p>
+          <h3 class="work-title">Also Something</h3>
+          <p class="work-desc">Still not ready. You're very patient.</p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ABOUT ──────────────────────────────────────────────── -->
+  <section id="about">
+    <div class="container">
+      <p class="section-label">// about</p>
+      <h2 class="section-title">Who Is This</h2>
+
+      <div class="about-layout">
+        <div class="about-text">
+          <p>
+            Hi, I'm J. I've been on the internet since YouTube had
+            the star rating system — which should tell you everything
+            you need to know about my credentials.
+          </p>
+          <p>
+            You might know me from my passion projects, and yes,
+            the shitposts count. I also put out a lot of CC0 work
+            because I think the internet works better when people
+            actually share things.
+          </p>
+          <p>
+            I know how this works. Or people think I do, which
+            at this point is basically the same thing.
+          </p>
+          <p>
+            Anyway, that's me. What more were you expecting — <span style="color:var(--dim); font-style:italic;">an origin story?</span>
+          </p>
+        </div>
+
+        <div>
+          <p class="skills-head">// tools i use</p>
+          <ul class="skills">
+            <li>DaVinci Resolve</li>
+            <li>Clip Studio Paint</li>
+            <li>FL Studio</li>
+            <li>Blender</li>
+            <li>NOT ADOBE <span class="skill-note">— never again</span></li>
+            <li>Other stuff <span class="skill-note">— I'll add it later</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTACT ────────────────────────────────────────────── -->
+  <section id="contact">
+    <div class="container">
+      <p class="section-label">// contact</p>
+      <h2 class="section-title">Get In Touch</h2>
+
+      <div class="contact-blurb">
+        <p>My DMs are open to everyone. Let's keep it that way.</p>
+        <p>Small creator or big one, doesn't matter. Treat me as an equal and we'll be fine. <span style="color:var(--dim); font-style:italic;">(just don't make a bad first impression — you'll know if you're about to.)</span></p>
+      </div>
+
+      <div class="contact-row">
+<a href="#" class="contact-link" target="_blank" rel="noopener">twitter/x</a>
+        <a href="#" class="contact-link" target="_blank" rel="noopener">discord</a>
+      </div>
+
+      <div style="margin-top:3rem; margin-bottom:-1rem;">
+        <p class="section-label">// the terms</p>
+        <h3 class="section-title" style="margin-bottom:1.5rem;">here's the catch — want me to edit for you?</h3>
+      </div>
+
+      <div class="pricing-grid">
+
+        <div class="pricing-card preferred">
+          <p class="pricing-option">// option 01 — collab</p>
+          <p class="pricing-price">free*</p>
+          <span class="pricing-price-note">*terms and conditions: we figure it out</span>
+          <p class="pricing-desc">
+            We both bring something to the table. I bring the pipeline,
+            you bring the idea. We make the thing, we find a way to make
+            the money back somewhere down the line.
+            <span class="pricing-caveat">maybe.</span>
+          </p>
+        </div>
+
+        <div class="pricing-card">
+          <p class="pricing-option">// option 02 — hire me</p>
+          <p class="pricing-price">cash.</p>
+          <span class="pricing-price-note">i'd do it for free. i won't, but i would.</span>
+          <p class="pricing-desc">
+            You have a brief. I execute it — concept, production, edit,
+            post, the whole thing — to the best of my ability.
+            <span class="pricing-caveat">(please don't choose this one)</span>
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ─────────────────────────────────────────────── -->
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-copy">© <span id="year"></span> J</span>
+      <span class="footer-note">still under construction</span>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
