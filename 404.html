@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>J — page not found</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Comic+Neue:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg:     #0c0c10;
+      --border: #2a2a3a;
+      --accent: #c8ff00;
+      --dim:    #44445a;
+      --text:   #c0c0d8;
+      --bright: #eeeeff;
+      --warn:   #ffcc00;
+      --comic:  'Comic Sans MS', 'Comic Neue', cursive;
+      --pixel:  'Press Start 2P', monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--comic);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: radial-gradient(circle, #ffffff05 1px, transparent 1px);
+      background-size: 28px 28px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .site-notice {
+      background: repeating-linear-gradient(
+        -45deg,
+        #1a1500, #1a1500 6px,
+        #221d00 6px, #221d00 12px
+      );
+      border-bottom: 1px solid #3a3000;
+      padding: 0.5rem 1.5rem;
+      font-family: var(--pixel);
+      font-size: 0.38rem;
+      color: var(--warn);
+      letter-spacing: 0.12em;
+      text-align: center;
+    }
+
+    .center {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 3rem 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .error-code {
+      font-family: var(--pixel);
+      font-size: clamp(2.5rem, 12vw, 5rem);
+      color: var(--bright);
+      line-height: 1;
+      margin-bottom: 1.5rem;
+    }
+
+    .error-code .cursor {
+      color: var(--accent);
+      animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .error-msg {
+      font-size: 1.1rem;
+      max-width: 420px;
+      margin-bottom: 0.6rem;
+    }
+
+    .error-sub {
+      font-size: 0.85rem;
+      color: var(--dim);
+      font-style: italic;
+      margin-bottom: 2.2rem;
+    }
+
+    .btn {
+      font-family: var(--pixel);
+      font-size: 0.45rem;
+      padding: 0.75rem 1.3rem;
+      letter-spacing: 0.08em;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      transition: background 0.15s, color 0.15s;
+      display: inline-block;
+    }
+    .btn:hover { background: var(--accent); color: var(--bg); text-decoration: none; }
+
+    footer {
+      position: relative;
+      z-index: 1;
+      padding: 1.5rem;
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--dim);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="site-notice">
+    ⚠ &nbsp; UNDER CONSTRUCTION &nbsp; — &nbsp; HAS BEEN SINCE 2012 &nbsp; ⚠
+  </div>
+
+  <div class="center">
+    <p class="error-code">404<span class="cursor">_</span></p>
+    <p class="error-msg">this page doesn't exist. not in this dimension, anyway.</p>
+    <p class="error-sub">you probably typed something wrong. or i broke a link. 50/50, honestly.</p>
+    <a href="index.html" class="btn">[ take me home ]</a>
+  </div>
+
+  <footer>© <span id="year"></span> J</footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
