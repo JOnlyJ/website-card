@@ -1,0 +1,34 @@
+[
+  {
+    "type": "video",
+    "title": "Video Title",
+    "description": "Short description. One or two lines.",
+    "link": "https://youtube.com/",
+    "linkLabel": "youtube",
+    "thumbnail": ""
+  },
+  {
+    "type": "art",
+    "title": "Illustration Title",
+    "description": "Short description. One or two lines.",
+    "link": "#",
+    "linkLabel": "view",
+    "thumbnail": ""
+  },
+  {
+    "type": "audio",
+    "title": "Track Title",
+    "description": "Short description. One or two lines.",
+    "link": "https://soundcloud.com/",
+    "linkLabel": "soundcloud",
+    "thumbnail": ""
+  },
+  {
+    "type": "other",
+    "title": "Something Else",
+    "description": "Short description. One or two lines.",
+    "link": "#",
+    "linkLabel": "link",
+    "thumbnail": ""
+  }
+]

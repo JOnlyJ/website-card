@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>J — expert mode</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Comic+Neue:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg:     #0c0c10;
+      --border: #2a2a3a;
+      --accent: #c8ff00;
+      --dim:    #44445a;
+      --text:   #c0c0d8;
+      --bright: #eeeeff;
+      --warn:   #ffcc00;
+      --comic:  'Comic Sans MS', 'Comic Neue', cursive;
+      --pixel:  'Press Start 2P', monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: monospace;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    a { color: var(--accent); }
+    a:hover { color: var(--bright); }
+
+    /* ── CONSTRUCTION BANNER ───────────────────────────────── */
+    .site-notice {
+      background: repeating-linear-gradient(
+        -45deg,
+        #1a1500, #1a1500 6px,
+        #221d00 6px, #221d00 12px
+      );
+      border-bottom: 1px solid #3a3000;
+      padding: 0.5rem 1.5rem;
+      font-family: var(--pixel);
+      font-size: 0.38rem;
+      color: var(--warn);
+      letter-spacing: 0.12em;
+      text-align: center;
+    }
+
+    /* ── NAV ───────────────────────────────────────────────── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(12,12,16,0.96);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    nav {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .nav-brand {
+      font-family: var(--pixel);
+      font-size: 0.6rem;
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--comic);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--dim);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--bright); }
+    .nav-links a.active {
+      font-family: var(--pixel);
+      font-size: 0.38rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      color: #888899;
+    }
+
+    /* ── CONTENT ───────────────────────────────────────────── */
+    .wrap {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+    }
+
+    .page-label {
+      font-family: var(--pixel);
+      font-size: 0.4rem;
+      color: var(--dim);
+      letter-spacing: 0.2em;
+      margin-bottom: 0.5rem;
+    }
+
+    h1 {
+      font-family: monospace;
+      font-size: 1rem;
+      font-weight: normal;
+      color: var(--bright);
+      margin-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.8rem;
+    }
+
+    /* ── FILTER ────────────────────────────────────────────── */
+    .filter {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      font-size: 0.82rem;
+      flex-wrap: wrap;
+    }
+
+    .filter span { color: var(--dim); }
+
+    .filter a {
+      color: var(--dim);
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .filter a:hover { color: var(--bright); }
+    .filter a.active { color: var(--accent); }
+
+    /* ── LIST ──────────────────────────────────────────────── */
+    .entry-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .entry {
+      display: grid;
+      grid-template-columns: 72px 1fr auto;
+      gap: 1rem;
+      align-items: baseline;
+      padding: 0.45rem 0;
+      border-bottom: 1px solid #1a1a28;
+    }
+
+    .entry:hover { background: #0f0f18; }
+    .entry:hover .entry-name { color: var(--bright); }
+
+    .entry-type {
+      font-size: 0.75rem;
+      color: var(--dim);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .entry-name {
+      font-size: 0.9rem;
+      color: var(--text);
+    }
+
+    .entry-link {
+      font-size: 0.78rem;
+      color: var(--dim);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .entry-link:hover { color: var(--accent); }
+
+    .entry.hidden { display: none; }
+
+    /* ── FOOTER ────────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem;
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--dim);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="site-notice">
+    ⚠ &nbsp; UNDER CONSTRUCTION &nbsp; — &nbsp; HAS BEEN SINCE 2012 &nbsp; ⚠
+  </div>
+
+  <header>
+    <nav>
+      <span class="nav-brand">J</span>
+      <ul class="nav-links">
+        <li><a href="index.html">main</a></li>
+        <li><a href="work-dump.html">work dump</a></li>
+        <li><a href="expert-mode.html" class="active">expert mode</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="wrap">
+    <p class="page-label">// expert mode</p>
+    <h1>everything, as a list.</h1>
+
+    <div class="filter">
+      <span>filter:</span>
+      <a class="active" data-filter="all" href="#">all</a>
+      <a data-filter="video" href="#">video</a>
+      <a data-filter="art" href="#">art</a>
+      <a data-filter="audio" href="#">audio</a>
+      <a data-filter="other" href="#">other</a>
+    </div>
+
+    <ul class="entry-list" id="list"></ul>
+  </div>
+
+  <footer>© <span id="year"></span> J</footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const list    = document.getElementById('list');
+    const filters = document.querySelectorAll('.filter a');
+    let   works   = [];
+    let   activeFilter = 'all';
+
+    function renderList() {
+      list.innerHTML = '';
+
+      const filtered = activeFilter === 'all'
+        ? works
+        : works.filter(w => w.type === activeFilter);
+
+      if (filtered.length === 0) {
+        list.innerHTML = '<li style="color:#44445a; font-style:italic; padding:0.5rem 0;">nothing here yet.</li>';
+        return;
+      }
+
+      filtered.forEach(entry => {
+        const li = document.createElement('li');
+        li.className = 'entry';
+        li.dataset.type = entry.type;
+        li.innerHTML = `
+          <span class="entry-type">${entry.type}</span>
+          <span class="entry-name">${entry.title}</span>
+          <a class="entry-link" href="${entry.link}" target="_blank" rel="noopener">
+            ${entry.linkLabel} →
+          </a>`;
+        list.appendChild(li);
+      });
+    }
+
+    filters.forEach(f => {
+      f.addEventListener('click', e => {
+        e.preventDefault();
+        filters.forEach(x => x.classList.remove('active'));
+        f.classList.add('active');
+        activeFilter = f.dataset.filter;
+        renderList();
+      });
+    });
+
+    fetch('data/works.json')
+      .then(r => r.json())
+      .then(data => { works = data; renderList(); })
+      .catch(() => {
+        list.innerHTML = '<li style="color:#44445a; font-style:italic; padding:0.5rem 0;">could not load works.json.</li>';
+      });
+  </script>
+
+</body>
+</html>
