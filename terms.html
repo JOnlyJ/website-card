@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>J — terms</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Comic+Neue:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg:     #0c0c10;
+      --border: #2a2a3a;
+      --accent: #c8ff00;
+      --dim:    #44445a;
+      --text:   #c0c0d8;
+      --bright: #eeeeff;
+      --warn:   #ffcc00;
+      --danger: #ff5566;
+      --comic:  'Comic Sans MS', 'Comic Neue', cursive;
+      --pixel:  'Press Start 2P', monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--comic);
+      font-size: 1rem;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: radial-gradient(circle, #ffffff05 1px, transparent 1px);
+      background-size: 28px 28px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── CONSTRUCTION BANNER ───────────────────────────────── */
+    .site-notice {
+      background: repeating-linear-gradient(
+        -45deg,
+        #1a1500, #1a1500 6px,
+        #221d00 6px, #221d00 12px
+      );
+      border-bottom: 1px solid #3a3000;
+      padding: 0.5rem 1.5rem;
+      font-family: var(--pixel);
+      font-size: 0.38rem;
+      color: var(--warn);
+      letter-spacing: 0.12em;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── NAV ───────────────────────────────────────────────── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(12,12,16,0.96);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    nav {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .nav-brand {
+      font-family: var(--pixel);
+      font-size: 0.6rem;
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--comic);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--dim);
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--bright); text-decoration: none; }
+
+    /* ── CONTENT ───────────────────────────────────────────── */
+    .wrap {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 3.5rem 1.5rem 5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .page-label {
+      font-family: var(--pixel);
+      font-size: 0.4rem;
+      color: var(--dim);
+      letter-spacing: 0.2em;
+      margin-bottom: 0.6rem;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--bright);
+      line-height: 1.2;
+      margin-bottom: 0.4rem;
+    }
+
+    .updated {
+      font-size: 0.8rem;
+      color: var(--dim);
+      font-style: italic;
+      margin-bottom: 3rem;
+    }
+
+    /* ── TL;DR ─────────────────────────────────────────────── */
+    .tldr {
+      border: 1px dashed var(--border);
+      padding: 1.6rem 1.6rem 1.2rem;
+      margin-bottom: 4rem;
+      position: relative;
+    }
+
+    .tldr-tag {
+      position: absolute;
+      top: -0.55rem;
+      left: 1.2rem;
+      background: var(--bg);
+      padding: 0 0.5rem;
+      font-family: var(--pixel);
+      font-size: 0.42rem;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+    }
+
+    .tldr p { margin-bottom: 1rem; }
+    .tldr p:last-child { margin-bottom: 0; }
+
+    .tldr ul {
+      list-style: none;
+      margin: 0.6rem 0 1.2rem 0.2rem;
+    }
+
+    .tldr li {
+      padding-left: 1.4rem;
+      position: relative;
+      margin-bottom: 0.4rem;
+    }
+    .tldr li::before {
+      content: '✗';
+      position: absolute;
+      left: 0;
+      color: var(--danger);
+      font-weight: 700;
+    }
+    .tldr li strong { color: var(--bright); }
+
+    .tldr .yes li::before { content: '✓'; color: var(--accent); }
+
+    .tldr .heads-up {
+      margin-top: 1.4rem;
+      padding: 0.9rem 1rem;
+      background: #1a1500;
+      border-left: 3px solid var(--warn);
+      font-size: 0.92rem;
+    }
+    .tldr .heads-up strong { color: var(--warn); }
+
+    /* ── FORMAL ────────────────────────────────────────────── */
+    .divider {
+      font-family: var(--pixel);
+      font-size: 0.38rem;
+      color: var(--dim);
+      letter-spacing: 0.2em;
+      text-align: center;
+      margin-bottom: 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .divider::before, .divider::after {
+      content: '';
+      flex: 1;
+      border-top: 1px solid var(--border);
+    }
+
+    .formal {
+      font-family: monospace;
+      font-size: 0.86rem;
+      line-height: 1.75;
+    }
+
+    .formal h2 {
+      font-family: monospace;
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: var(--bright);
+      margin: 2.2rem 0 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .formal h2:first-child { margin-top: 0; }
+
+    .formal h2 span { color: var(--dim); margin-right: 0.6rem; }
+
+    .formal p { margin-bottom: 0.9rem; }
+
+    .formal ol {
+      margin: 0 0 0.9rem 1.6rem;
+    }
+    .formal ol li { margin-bottom: 0.5rem; }
+    .formal ol li strong { color: var(--bright); }
+
+    .formal .note {
+      color: var(--dim);
+      font-style: italic;
+    }
+
+    /* ── FOOTER ────────────────────────────────────────────── */
+    footer {
+      position: relative;
+      z-index: 1;
+      padding: 2rem 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-copy { font-size: 0.85rem; color: var(--dim); }
+    .footer-link { color: var(--dim); }
+    .footer-link:hover { color: var(--accent); }
+
+    .footer-note {
+      font-family: var(--pixel);
+      font-size: 0.35rem;
+      color: #222233;
+      letter-spacing: 0.1em;
+    }
+
+    @media (max-width: 480px) {
+      h1 { font-size: 1.6rem; }
+      .tldr { padding: 1.4rem 1.1rem 1rem; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="site-notice">
+    ⚠ &nbsp; UNDER CONSTRUCTION &nbsp; — &nbsp; HAS BEEN SINCE 2012 &nbsp; ⚠
+  </div>
+
+  <header>
+    <nav>
+      <span class="nav-brand">J</span>
+      <ul class="nav-links">
+        <li><a href="index.html">main</a></li>
+        <li><a href="work-dump.html">work dump</a></li>
+        <li><a href="expert-mode.html" style="font-family:var(--pixel); font-size:0.38rem; font-weight:400; letter-spacing:0.08em; color:#333344;">expert mode</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="wrap">
+    <p class="page-label">// terms of use</p>
+    <h1>the rules. such as they are.</h1>
+    <p class="updated">last updated: september 14, 2026</p>
+
+    <!-- ── TL;DR ─────────────────────────────────────────────── -->
+    <section class="tldr">
+      <span class="tldr-tag">TL;DR</span>
+
+      <p>
+        <strong>Stuff that isn't mine:</strong> if it's a collab, client work, or something I only contributed to,
+        go check that project. it has its own rules and I don't speak for it.
+      </p>
+
+      <p>
+        <strong>Stuff that is mine:</strong> 99% of the time it's CC0. take it, remix it, print it on a mug,
+        put it in your game. credit is nice but I'm not gonna chase you for it.
+      </p>
+
+      <p>the other 1% will be clearly marked. if it isn't marked, assume CC0.</p>
+
+      <p>that said, there are four things I'm <em>not</em> okay with, CC0 or not:</p>
+      <ul>
+        <li><strong>AI.</strong> don't feed my work into training sets, datasets, fine-tunes, LoRAs, whatever. no.</li>
+        <li><strong>Politically specific stuff.</strong> don't use my work to push a party, campaign, candidate, or hot-button political cause. same goes for things you know are 50/50, or where you're just trying to rage bait people.</li>
+        <li><strong>Pure NSFW.</strong> don't turn my work into, or use it inside, straight-up porn.</li>
+        <li><strong>Non-transformative re-uploads.</strong> don't just re-upload my stuff as-is somewhere else. do something with it first.</li>
+      </ul>
+
+      <p>that's it. genuinely. everything else is fair game.</p>
+
+      <div class="heads-up">
+        <strong>heads up:</strong> if I catch people trying to weasel around these four, I'll be forced to get
+        way more restrictive with everything. don't ruin it for everyone else.
+      </div>
+    </section>
+
+    <!-- ── FORMAL ────────────────────────────────────────────── -->
+    <p class="divider">the formal version</p>
+
+    <section class="formal">
+
+      <h2><span>1.</span>Scope</h2>
+      <p>
+        These Terms govern the use of creative works published on this website or otherwise made available by J
+        ("the Author"), including but not limited to illustrations, video, audio, and written material
+        (collectively, "the Works"). By accessing, downloading, or using any of the Works, you agree to these Terms.
+      </p>
+
+      <h2><span>2.</span>Third-Party and Collaborative Works</h2>
+      <p>
+        Works produced in collaboration with other parties, commissioned by a client, or to which the Author
+        contributed as part of a larger project ("Third-Party Works") are not covered by the license grant in
+        Section 3. Third-Party Works are subject exclusively to the license, terms, and conditions established by
+        the respective project or rights holder. The Author makes no representation regarding, and grants no rights
+        to, Third-Party Works. You are responsible for consulting the originating project before any use.
+      </p>
+
+      <h2><span>3.</span>License Grant for Personal Works</h2>
+      <p>
+        Unless a Work is expressly marked otherwise (see Section 5), the Author grants you a worldwide,
+        royalty-free, non-exclusive, perpetual license to reproduce, adapt, modify, distribute, publicly display,
+        publicly perform, and otherwise use the Author's personal Works ("Personal Works") for any purpose,
+        including commercial purposes, in the spirit of the Creative Commons CC0 1.0 Universal Public Domain
+        Dedication, <strong>subject to the exclusions set out in Section 4</strong>.
+      </p>
+      <p class="note">
+        Note: because these Terms carry exclusions, this grant is a broad permissive license and not a literal
+        CC0 dedication. Where a Work is individually and explicitly published under a true CC0 dedication, that
+        dedication controls for that Work.
+      </p>
+
+      <h2><span>4.</span>Excluded Uses</h2>
+      <p>The license in Section 3 does not extend to, and you may not use any Personal Work for, the following:</p>
+      <ol>
+        <li>
+          <strong>Machine learning and artificial intelligence.</strong> Using, reproducing, or incorporating the
+          Works, in whole or in part, as training data, fine-tuning data, validation data, embeddings, or in any
+          dataset intended for the development, training, refinement, or evaluation of machine learning models,
+          artificial intelligence systems, or generative models of any kind, including but not limited to
+          fine-tunes, LoRAs, textual inversions, and similar derivative model weights.
+        </li>
+        <li>
+          <strong>Politically specific content.</strong> Using the Works in connection with, or in support of,
+          any political party, candidate, campaign, electoral effort, lobbying activity, or advocacy for a specific
+          contested political position, whether or not for commercial gain. This includes use in connection with
+          topics the user knows, or reasonably should know, to be substantially divisive, and any use whose
+          primary purpose is to provoke, inflame, or bait a hostile reaction ("rage bait").
+        </li>
+        <li>
+          <strong>Pure sexually explicit content.</strong> Using, modifying, or incorporating the Works into
+          material whose primary purpose is sexually explicit depiction (pornographic content). This exclusion is
+          directed at material that is explicit in nature; it is not intended to cover incidental mature themes
+          within a work of broader scope.
+        </li>
+        <li>
+          <strong>Non-transformative re-uploads.</strong> Re-publishing, re-hosting, or re-distributing a Work,
+          in whole or in substantial part, without meaningful transformation, adaptation, or incorporation into a
+          larger work. Mirroring, reposting, or re-uploading a Work in materially unaltered form, regardless of
+          platform or attribution, is not licensed.
+        </li>
+      </ol>
+      <p>
+        Any use described in this Section is unlicensed and constitutes an infringement of the Author's rights.
+        The Author reserves all rights not expressly granted.
+      </p>
+
+      <h2><span>5.</span>Marked Exceptions</h2>
+      <p>
+        The Author may, at their sole discretion, designate specific Works as excluded from the grant in Section 3
+        or as subject to different terms. Such designation will be made explicitly in the Work's description,
+        accompanying metadata, or the page on which the Work is published. In the absence of any such marking,
+        a Personal Work is governed by Section 3.
+      </p>
+
+      <h2><span>6.</span>Attribution</h2>
+      <p>
+        Attribution is not required as a condition of the license in Section 3. Where attribution is given, you
+        may not imply endorsement by, affiliation with, or sponsorship from the Author without prior written
+        consent.
+      </p>
+
+      <h2><span>7.</span>No Warranty; Limitation of Liability</h2>
+      <p>
+        The Works are provided "as is" without warranty of any kind, express or implied, including but not limited
+        to warranties of merchantability, fitness for a particular purpose, title, or non-infringement. To the
+        maximum extent permitted by applicable law, the Author shall not be liable for any claim, damages, or
+        other liability arising from or in connection with the Works or their use.
+      </p>
+
+      <h2><span>8.</span>Enforcement and Modification of Terms</h2>
+      <p>
+        The permissive nature of these Terms depends on good-faith compliance. The Author expressly reserves the
+        right to amend, narrow, or revoke the license grant in Section 3, in whole or in part, at any time and
+        without prior notice. In particular, should the Author become aware of attempts to circumvent, evade, or
+        otherwise defeat the exclusions in Section 4, the Author will be compelled to adopt materially more
+        restrictive terms applicable to all Works and all users. Continued use of the Works following any amendment
+        constitutes acceptance of the amended Terms.
+      </p>
+      <p>
+        Rights obtained under a prior version of these Terms for a specific, completed use made in good faith and in
+        compliance with that version are not retroactively revoked.
+      </p>
+
+      <h2><span>9.</span>Severability</h2>
+      <p>
+        If any provision of these Terms is held to be unenforceable, the remaining provisions shall continue in full
+        force and effect, and the unenforceable provision shall be construed to give the greatest effect to the
+        Author's intent as permitted by law.
+      </p>
+
+      <h2><span>10.</span>Contact</h2>
+      <p>
+        Questions regarding these Terms, requests for uses outside the scope of Section 3, or reports of misuse may
+        be directed to the Author via the contact links on the <a href="index.html">main page</a>.
+      </p>
+
+    </section>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-copy">© <span id="year"></span> J &nbsp;·&nbsp; <a href="terms.html" class="footer-link">terms</a></span>
+      <span class="footer-note">still under construction</span>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
