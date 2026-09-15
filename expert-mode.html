@@ -193,6 +193,8 @@
       font-size: 0.75rem;
       color: var(--dim);
     }
+    .footer-link { color: var(--dim); text-decoration: none; }
+    .footer-link:hover { color: var(--accent); }
   </style>
 </head>
 
@@ -229,7 +231,7 @@
     <ul class="entry-list" id="list"></ul>
   </div>
 
-  <footer>© <span id="year"></span> J</footer>
+  <footer>© <span id="year"></span> J &nbsp;·&nbsp; <a href="terms.html" class="footer-link">terms</a></footer>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
